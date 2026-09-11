@@ -84,39 +84,37 @@ export default function Home() {
   return (
     <>
       <section>
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 pb-16 pt-12 sm:px-8 lg:min-h-[calc(100svh-4rem-1px)] lg:grid-cols-12 lg:gap-12 lg:py-12">
-          <div className="flex flex-col justify-between lg:col-span-5">
-            <div>
-              <p className="flex items-center gap-2 text-sm text-ink-soft">
-                <span className="h-1.5 w-1.5 rounded-full bg-olive" />
-                Delivering daily from noon, free over ₹499
-              </p>
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-12 sm:px-8 lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-20">
+          <div className="lg:col-span-5">
+            <p className="flex items-center gap-2 text-sm text-ink-soft">
+              <span className="h-1.5 w-1.5 rounded-full bg-olive" />
+              Delivering daily from noon, free over ₹499
+            </p>
 
-              <h1 className="mt-6 font-display text-[3.25rem] leading-[0.95] tracking-[-0.02em] text-ink sm:text-7xl">
-                Food worth <em className="text-brand">sitting down</em> for.
-              </h1>
+            <h1 className="mt-6 font-display text-[3.25rem] leading-[0.95] tracking-[-0.02em] text-ink sm:text-7xl">
+              Food worth <em className="text-brand">sitting down</em> for.
+            </h1>
 
-              <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">
-                A short, seasonal menu of starters, mains, desserts and drinks, cooked from scratch every day and
-                delivered hot to your door.
-              </p>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">
+              A short, seasonal menu of starters, mains, desserts and drinks, cooked from scratch every day and
+              delivered hot to your door.
+            </p>
 
-              <div className="mt-9 flex flex-wrap items-center gap-6">
-                <a href="#menu" className={`${buttonPrimary} px-6`}>
-                  Order now
-                </a>
-                {!user && (
-                  <Link
-                    to="/register"
-                    className="text-sm font-medium text-ink underline decoration-ink/25 underline-offset-[6px] transition-colors hover:decoration-brand"
-                  >
-                    Create an account
-                  </Link>
-                )}
-              </div>
+            <div className="mt-9 flex flex-wrap items-center gap-6">
+              <a href="#menu" className={`${buttonPrimary} px-6`}>
+                Order now
+              </a>
+              {!user && (
+                <Link
+                  to="/register"
+                  className="text-sm font-medium text-ink underline decoration-ink/25 underline-offset-[6px] transition-colors hover:decoration-brand"
+                >
+                  Create an account
+                </Link>
+              )}
             </div>
 
-            <dl className="mt-14 grid grid-cols-3">
+            <dl className="mt-12 grid grid-cols-3">
               <Stat label="On the menu" value={loading ? '-' : items.length} />
               <Stat label="Available now" value={loading ? '-' : inStock} />
               <Stat label="Courses" value={CATEGORIES.length} />
@@ -125,11 +123,11 @@ export default function Home() {
 
           <div className="lg:col-span-7">
             {mainPhoto ? (
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:h-full lg:min-h-140 lg:grid-cols-5 lg:grid-rows-2">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:aspect-6/5 lg:grid-cols-5 lg:grid-rows-2">
                 <PhotoTile
                   item={mainPhoto}
-                  className={`col-span-2 aspect-4/3 lg:aspect-auto ${
-                    sidePhotos.length ? 'lg:col-span-3 lg:row-span-2' : 'lg:col-span-5 lg:row-span-2'
+                  className={`col-span-2 aspect-4/3 lg:aspect-auto lg:row-span-2 ${
+                    sidePhotos.length ? 'lg:col-span-3' : 'lg:col-span-5'
                   }`}
                   transform="c_fill,w_900,h_1100"
                 />
@@ -143,7 +141,7 @@ export default function Home() {
                 ))}
               </div>
             ) : (
-              <div className="aspect-4/3 rounded-md bg-line/60 lg:aspect-auto lg:h-full lg:min-h-140" />
+              <div className="aspect-4/3 rounded-md bg-line/60 lg:aspect-6/5" />
             )}
           </div>
         </div>
