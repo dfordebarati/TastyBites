@@ -156,7 +156,7 @@ export default function Checkout() {
       <h1 className="mt-3 font-display text-5xl tracking-tight text-ink">Checkout</h1>
 
       <form onSubmit={handleSubmit} className="mt-10 grid gap-10 lg:grid-cols-12">
-        <div className="space-y-12 lg:col-span-7">
+        <div className="min-w-0 space-y-12 lg:col-span-7">
           <section>
             <h2 className="font-display text-2xl text-ink">Contact</h2>
             <div className="mt-5 grid gap-5 sm:grid-cols-2">
@@ -334,7 +334,7 @@ export default function Checkout() {
           </section>
         </div>
 
-        <aside className="lg:col-span-5 lg:pl-6">
+        <aside className="min-w-0 lg:col-span-5 lg:pl-6">
           <div className="rounded-md border border-line bg-paper-soft p-6 lg:sticky lg:top-24">
             <h2 className="font-display text-2xl text-ink">Your order</h2>
 

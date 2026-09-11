@@ -161,7 +161,7 @@ export default function OrderDetails() {
       </section>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-5 lg:items-start">
-        <div className="space-y-6 lg:col-span-3">
+        <div className="min-w-0 space-y-6 lg:col-span-3">
           <section className={cardClass}>
             <h2 className="font-display text-2xl text-ink">Your items</h2>
 
@@ -208,7 +208,7 @@ export default function OrderDetails() {
           </section>
         </div>
 
-        <div className="space-y-6 lg:sticky lg:top-24 lg:col-span-2">
+        <div className="min-w-0 space-y-6 lg:sticky lg:top-24 lg:col-span-2">
           <section className={cardClass}>
             <h2 className="font-display text-2xl text-ink">Delivery</h2>
 

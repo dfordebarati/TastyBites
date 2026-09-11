@@ -1,3 +1,4 @@
+//defines all the routes (URL → which page component to show)
 import { Routes, Route } from 'react-router-dom';
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';

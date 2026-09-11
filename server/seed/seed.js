@@ -1,3 +1,4 @@
+//a script that fills the database with sample menu items + an admin account
 import 'dotenv/config';
 import mongoose from 'mongoose';
 import { connectDB } from '../src/config/db.js';

@@ -1,3 +1,5 @@
+//sets up Express: middleware + which routes exist
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';

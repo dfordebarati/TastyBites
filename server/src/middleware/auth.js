@@ -27,3 +27,4 @@ export const authorize = (...roles) => (req, _res, next) => {
   }
   next();
 };
+// code that runs before a controller (check login, rate-limit, handle errors)

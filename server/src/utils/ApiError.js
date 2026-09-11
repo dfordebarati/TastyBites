@@ -1,3 +1,4 @@
+//small helper functions (hash a token, calculate price totals)
 export default class ApiError extends Error {
   constructor(statusCode, message, details = undefined) {
     super(message);

@@ -10,3 +10,4 @@ router.post('/login', authLimiter, login);
 router.get('/me', protect, getMe);
 
 export default router;
+//maps a URL + HTTP method to a controller function

@@ -1,3 +1,5 @@
+//the actual logic: "what happens when this route is called"
+
 import User from '../models/User.js';
 import ApiError from '../utils/ApiError.js';
 import { signToken } from '../utils/token.js';

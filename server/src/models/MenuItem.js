@@ -1,3 +1,4 @@
+//the shape of your data (User, MenuItem, Order) — Mongoose schemas
 import mongoose from 'mongoose';
 
 export const CATEGORIES = Object.freeze([

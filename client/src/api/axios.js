@@ -11,3 +11,4 @@ api.interceptors.request.use((config) => {
 });
 
 export default api;
+//one shared Axios setup that automatically attaches your login token to every request

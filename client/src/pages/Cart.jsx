@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import QuantityStepper from '../components/QuantityStepper';
@@ -8,6 +9,49 @@ import { calculateTotals, FREE_DELIVERY_FROM } from '../lib/pricing';
 import { formatPrice } from '../lib/format';
 import { optimize } from '../lib/image';
 import { buttonPrimary } from '../lib/styles';
+
+const SUGGESTION_COUNT = 3;
+
+function Suggestions({ excludeIds }) {
+  const { addItem } = useCart();
+  const [dishes, setDishes] = useState([]);
+
+  useEffect(() => {
+    api
+      .get('/menu-items')
+      .then(({ data }) => setDishes(data.items.filter((item) => item.availability)))
+      .catch(() => {});
+  }, []);
+
+  const suggestions = dishes.filter((dish) => !excludeIds.has(dish._id)).slice(0, SUGGESTION_COUNT);
+  if (suggestions.length === 0) return null;
+
+  return (
+    <section className="mt-16 border-t border-line pt-10">
+      <h2 className="font-display text-2xl text-ink">You might also like</h2>
+      <div className="mt-6 grid gap-6 sm:grid-cols-3">
+        {suggestions.map((dish) => (
+          <div key={dish._id} className="flex gap-4">
+            <Link to={`/menu/${dish._id}`} className="h-20 w-20 shrink-0 overflow-hidden rounded-md bg-line">
+              {dish.image && (
+                <img src={optimize(dish.image, 'c_fill,w_160,h_160')} alt={dish.name} className="h-full w-full object-cover" />
+              )}
+            </Link>
+            <div className="min-w-0 flex-1">
+              <Link to={`/menu/${dish._id}`} className="block truncate font-medium text-ink transition-colors hover:text-brand">
+                {dish.name}
+              </Link>
+              <p className="text-sm tabular-nums text-ink-faint">{formatPrice(dish.price)}</p>
+              <button onClick={() => addItem(dish)} className="mt-1.5 text-sm font-medium text-brand hover:underline">
+                Add to cart
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 export default function Cart() {
   const { items, count, hasUnavailable, setQuantity, removeItem, refreshFromMenu } = useCart();
@@ -115,6 +159,8 @@ export default function Cart() {
           </div>
         </aside>
       </div>
+
+      <Suggestions excludeIds={new Set(items.map((item) => item._id))} />
     </div>
   );
 }

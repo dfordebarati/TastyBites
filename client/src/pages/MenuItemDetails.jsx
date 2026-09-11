@@ -20,11 +20,10 @@ function DetailRow({ label, children }) {
 
 export default function MenuItemDetails() {
   const { id } = useParams();
-  const { addItem, quantityOf } = useCart();
+  const { addItem, quantityOf, setQuantity: setCartQuantity } = useCart();
   const [item, setItem] = useState(null);
   const [related, setRelated] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [justAdded, setJustAdded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -77,12 +76,6 @@ export default function MenuItemDetails() {
   const courseLabel = CATEGORY_LABELS[item.category] ?? item.category;
   const inCart = quantityOf(item._id);
 
-  const handleAdd = () => {
-    addItem(item, quantity);
-    setJustAdded(true);
-    setTimeout(() => setJustAdded(false), 1500);
-  };
-
   return (
     <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-14">
       <nav className="text-sm text-ink-faint">
@@ -132,22 +125,24 @@ export default function MenuItemDetails() {
             <p className="mt-8 rounded-md bg-danger/10 px-4 py-3 text-sm text-danger">
               This dish is sold out for today. Please check back tomorrow.
             </p>
+          ) : inCart > 0 ? (
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <QuantityStepper
+                value={inCart}
+                onChange={(next) => setCartQuantity(item._id, next)}
+                label={`Quantity of ${item.name}`}
+              />
+              <Link to="/cart" className="text-sm font-medium text-brand underline underline-offset-4">
+                In your cart · {formatPrice(item.price * inCart)}
+              </Link>
+            </div>
           ) : (
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <QuantityStepper value={quantity} onChange={(next) => setQuantity(Math.max(1, next))} />
-              <button onClick={handleAdd} className={`${buttonPrimary} px-6`}>
-                {justAdded ? 'Added to cart' : `Add to cart · ${formatPrice(item.price * quantity)}`}
+              <button onClick={() => addItem(item, quantity)} className={`${buttonPrimary} px-6`}>
+                Add to cart · {formatPrice(item.price * quantity)}
               </button>
             </div>
-          )}
-
-          {inCart > 0 && (
-            <p className="mt-4 text-sm text-ink-soft">
-              {inCart} in your cart.{' '}
-              <Link to="/cart" className="font-medium text-brand underline underline-offset-4">
-                View cart
-              </Link>
-            </p>
           )}
 
           <Link to="/#menu" className="mt-6 inline-block text-sm text-ink-soft transition-colors hover:text-ink">
